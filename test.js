@@ -12,4 +12,6 @@ no maze found
 
 //cannot determine player location - location is underined
 console.assert(bearLocation !== undefined, "We have lost the bear!  His location is 'undefined'!");
-console.assert(bearLocation === [], "The bear needs a home!  His location is []...");
+
+// console.assert(bearLocation === [], "The bear needs a home!  His location is []...");  
+//that test only looks at location at the start of the program, before the maze is even run!  Not helpful!

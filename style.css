@@ -1,42 +1,44 @@
 :root {
-    background-color: forestgreen;
+    background-color:green;
 }
 
 body {
     background-image: url("img/grass.jpg");
-}
-header {
-   
-}
 
+
+}
 footer {
     background-color: forestgreen
 }
 
-.topArea {
+header {
     display: flex;
+    flex-direction: column;
     background-color: ivory;
     border: 1px double black;
     border-radius: 1em;
     padding: 1em;
     align-items: center;
+    max-width: 60%;
+    justify-content: center;
+    margin: auto;
 }
 
-.topArea img {
+header h1 {
+    margin: 0;
+}
+
+
+header p {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0;
+}
+
+header img {
     max-height: 25px;
     max-width: 25px;
     align-self: center;
-}
-
-.topArea button {
-    width: 8em;
-    height: 2em;
-    align-self: center;
-    flex: 1,1
-}
-
-.topArea>button:focus{
-    background-color: darkgreen;
 }
 
 
@@ -45,21 +47,35 @@ footer {
 }
 
 .maze {
+    width: 70%;
+    background-color: darkgoldenrod;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin: auto;
 }
 
 .mazeRow {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    flex: 1 1
 }
 
 .mazeItem {
     height: 30px;
     width: 30px;
     flex: 1 1
+}
+
+.tree {
+    background-color: darkgoldenrod;
+}
+
+.blank {
+    opacity: 0.4;
 }
 
 .youWon {
@@ -77,19 +93,4 @@ footer {
 .youWon img {
     max-height: 15em;
     max-width: 15em;
-}
-
-.bear {
-    width: 30px;
-    height: 30px;
-}
-
-.tree {
-    height: 30px;
-    width: 30px;
-}
-
-.cabin {
-    height: 30px;
-    width: 30px;
 }
