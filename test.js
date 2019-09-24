@@ -9,3 +9,7 @@ cannot determine player location
 no maze found
 
 */
+
+//cannot determine player location - location is underined
+console.assert(bearLocation !== undefined, "We have lost the bear!  His location is 'undefined'!");
+console.assert(bearLocation === [], "The bear needs a home!  His location is []...");

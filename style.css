@@ -1,0 +1,95 @@
+:root {
+    background-color: forestgreen;
+}
+
+body {
+    background-image: url("img/grass.jpg");
+}
+header {
+   
+}
+
+footer {
+    background-color: forestgreen
+}
+
+.topArea {
+    display: flex;
+    background-color: ivory;
+    border: 1px double black;
+    border-radius: 1em;
+    padding: 1em;
+    align-items: center;
+}
+
+.topArea img {
+    max-height: 25px;
+    max-width: 25px;
+    align-self: center;
+}
+
+.topArea button {
+    width: 8em;
+    height: 2em;
+    align-self: center;
+    flex: 1,1
+}
+
+.topArea>button:focus{
+    background-color: darkgreen;
+}
+
+
+.optionsAvailableDuringGame {
+    display: none
+}
+
+.maze {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mazeRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.mazeItem {
+    height: 30px;
+    width: 30px;
+    flex: 1 1
+}
+
+.youWon {
+    display: none;
+    flex-direction: column;
+    font-size: xx-large;
+    color: forestgreen;
+    background-color:ivory;
+    border: 1px double black;
+    border-radius: 1em;
+    align-items: center;
+   
+}
+
+.youWon img {
+    max-height: 15em;
+    max-width: 15em;
+}
+
+.bear {
+    width: 30px;
+    height: 30px;
+}
+
+.tree {
+    height: 30px;
+    width: 30px;
+}
+
+.cabin {
+    height: 30px;
+    width: 30px;
+}
