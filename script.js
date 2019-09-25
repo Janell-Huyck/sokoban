@@ -28,27 +28,16 @@ let maze = [
   "WWWWWWWWWWWWWWWWWWWWW"
 ];
 
-// function startOver(){
-//     // bearLocation = []; 
-//     // oldBearLocation = [];
-//     // startLocation = []; 
-//     // finishLocation = []; 
-//     clearTheOldMaze()
-//     redrawMaze()
-//     bearLocation = startLocation.slice(0);
-//     oldBearLocation = bearLocation.slice(0);
-
-// }
 
 //draw the row divs in the HTML so that we can later draw the images at them
 function createHTMLRows() {
-    for (let newRow = 0; newRow < maze.length; newRow++) {
-        var newDiv = document.createElement("div");
-        newDiv.id = "row" + newRow;
+  for (let newRow = 0; newRow < maze.length; newRow++) {
+    var newDiv = document.createElement("div");
+    newDiv.id = "row" + newRow;
         newDiv.className = "mazeRow";
         var destination = document.getElementById("thisIsTheMaze");
         destination.appendChild(newDiv);
-    }
+      }
 }
 
 
@@ -68,28 +57,28 @@ function redrawMaze() {
       let mazeColumnItem = 0;
       mazeColumnItem < maze[mazeRow].length;
       mazeColumnItem++
-    ) {
-      //draw the appropriate picture on the screen for each character.
-      if (maze[mazeRow][mazeColumnItem] === "W") {
-        drawMazeItem(treeImage, mazeRow);
+      ) {
+        //draw the appropriate picture on the screen for each character.
+        if (maze[mazeRow][mazeColumnItem] === "W") {
+          drawMazeItem(treeImage, mazeRow);
       
-    } else if (maze[mazeRow][mazeColumnItem] === "S") {
-        drawMazeItem(bearImage, mazeRow);
-        startLocation = [mazeRow, mazeColumnItem];
+        } else if (maze[mazeRow][mazeColumnItem] === "S") {
+          drawMazeItem(bearImage, mazeRow);
+          startLocation = [mazeRow, mazeColumnItem];
         maze[mazeRow] = maze[mazeRow].replace("S", "B"); //changes the S to a B so that I should be able to move it.
-      
+        
     } else if (maze[mazeRow][mazeColumnItem] === "F") {
-        drawMazeItem(cabinImage, mazeRow);
-        finishLocation = [mazeRow, mazeColumnItem];
+      drawMazeItem(cabinImage, mazeRow);
+      finishLocation = [mazeRow, mazeColumnItem];
       
     } else if (maze[mazeRow][mazeColumnItem] === "B") {
-        drawMazeItem(bearImage, mazeRow);
+      drawMazeItem(bearImage, mazeRow);
       
     } else {
-        drawMazeItem(blankImage, mazeRow);
-      }
+      drawMazeItem(blankImage, mazeRow);
     }
   }
+}
 }
 
 
@@ -131,19 +120,19 @@ function moveBear(e) {
     var bearColumnIndex = maze[oldBearLocation[0]].indexOf("B");
     
     maze[oldBearLocation[0]] =              //puts a " " where the bear used to be
-      maze[oldBearLocation[0]].slice(0, bearColumnIndex) +
-      " " +
-      maze[oldBearLocation[0]].slice(bearColumnIndex + 1);
-
+    maze[oldBearLocation[0]].slice(0, bearColumnIndex) +
+    " " +
+    maze[oldBearLocation[0]].slice(bearColumnIndex + 1);
+    
     maze[oldBearLocation[0] - 1] =          //puts a "B" where the bear used to be
-      maze[oldBearLocation[0] - 1].slice(0, bearColumnIndex) +
-      "B" +
-      maze[oldBearLocation[0] - 1].slice(bearColumnIndex + 1);
+    maze[oldBearLocation[0] - 1].slice(0, bearColumnIndex) +
+    "B" +
+    maze[oldBearLocation[0] - 1].slice(bearColumnIndex + 1);
     
     bearLocation[0]--;                       //update bear location
     redrawMaze();
     return;
-
+    
   } else if (e.key === "ArrowDown" || e.key === "S" || e.key === "s") {
     if (spaceDown == "W" || spaceDown == undefined) {
       return;
@@ -151,19 +140,19 @@ function moveBear(e) {
     var bearColumnIndex = maze[oldBearLocation[0]].indexOf("B");
     
     maze[oldBearLocation[0]] =
-      maze[oldBearLocation[0]].slice(0, bearColumnIndex) +
-      " " +
-      maze[oldBearLocation[0]].slice(bearColumnIndex + 1);
+    maze[oldBearLocation[0]].slice(0, bearColumnIndex) +
+    " " +
+    maze[oldBearLocation[0]].slice(bearColumnIndex + 1);
     
     maze[oldBearLocation[0] + 1] =
-      maze[oldBearLocation[0] + 1].slice(0, bearColumnIndex) +
-      "B" +
-      maze[oldBearLocation[0] + 1].slice(bearColumnIndex + 1);
+    maze[oldBearLocation[0] + 1].slice(0, bearColumnIndex) +
+    "B" +
+    maze[oldBearLocation[0] + 1].slice(bearColumnIndex + 1);
     
     bearLocation[0]++;
     redrawMaze();
     return;
-
+    
   } else if (e.key === "ArrowLeft" || e.key === "A" || e.key === "a") {
     if (spaceLeft == "W" || spaceLeft == undefined) {
       return;
@@ -172,7 +161,7 @@ function moveBear(e) {
     bearLocation[1]--;
     redrawMaze();
     return;
-
+    
   } else if (e.key === "ArrowRight" || e.key === "D" || e.key === "d") {
     if (spaceRight == "W" || spaceRight == undefined) {
       return;
@@ -186,8 +175,12 @@ function moveBear(e) {
 
 
 function checkForWin(target) {
-    if (target !== "F") {return}
-    document.getElementById("youWon").style.display="flex"
+  if (target !== "F") {return}
+  document.getElementById("youWon").style.display="flex"
+}
+
+function startOver(){
+  window.location.reload()
 }
 
 createHTMLRows();
