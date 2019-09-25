@@ -1,6 +1,5 @@
 let bearLocation = []; // where on the map the player's bear is.  expressed as [row, column]
 let oldBearLocation = []; //used when moving bear
-let newBearLocation = [];
 let startLocation = []; // [row, column])
 let finishLocation = []; // [row, column])
 
@@ -29,31 +28,39 @@ let maze = [
   "WWWWWWWWWWWWWWWWWWWWW"
 ];
 
+// function startOver(){
+//     // bearLocation = []; 
+//     // oldBearLocation = [];
+//     // startLocation = []; 
+//     // finishLocation = []; 
+//     clearTheOldMaze()
+//     redrawMaze()
+//     bearLocation = startLocation.slice(0);
+//     oldBearLocation = bearLocation.slice(0);
+
+// }
 
 //draw the row divs in the HTML so that we can later draw the images at them
 function createHTMLRows() {
-  for (let newRow = 0; newRow < maze.length; newRow++) {
-    var newDiv = document.createElement("div");
-    newDiv.id = "row" + newRow;
-    newDiv.className = "mazeRow";
-    var destination = document.getElementById("thisIsTheMaze");
-    destination.appendChild(newDiv);
+    for (let newRow = 0; newRow < maze.length; newRow++) {
+        var newDiv = document.createElement("div");
+        newDiv.id = "row" + newRow;
+        newDiv.className = "mazeRow";
+        var destination = document.getElementById("thisIsTheMaze");
+        destination.appendChild(newDiv);
+    }
+}
+
+
+function clearTheOldMaze() {
+  for (let rowToClear = 0; rowToClear < maze.length; rowToClear++) {
+    document.getElementById("row" + rowToClear).innerHTML = "";
   }
 }
 
 
-function determineStartingMove() {
-  //don't let player move out of bounds on their first turn
-}
-
-function clearTheOldMaze() {
-    for (let rowToClear = 0; rowToClear < maze.length; rowToClear++) {
-        document.getElementById("row" + rowToClear).innerHTML = ""
-    }
-}
-
-function drawMazeAndUpdateBearLocation() {
-    clearTheOldMaze()
+function redrawMaze() {
+  clearTheOldMaze();
   //for every row
   for (let mazeRow = 0; mazeRow < maze.length; mazeRow++) {
     //for every column in that row
@@ -63,101 +70,129 @@ function drawMazeAndUpdateBearLocation() {
       mazeColumnItem++
     ) {
       //draw the appropriate picture on the screen for each character.
-        if (maze[mazeRow][mazeColumnItem] === "W") {
-            drawMazeItem(treeImage, mazeRow);
-        } 
-        else if (maze[mazeRow][mazeColumnItem] === "S") {
-            drawMazeItem(bearImage, mazeRow);
-            startLocation = [mazeRow, mazeColumnItem];
-            maze[mazeRow] = maze[mazeRow].replace("S", "B")  //changes the S to a B so that I should be able to move it.
-        } 
-        else if (maze[mazeRow][mazeColumnItem] === "F") {
-            drawMazeItem(cabinImage, mazeRow);
-            finishLocation = [mazeRow, maze[mazeRow][mazeColumnItem]];
-        } 
-        else if (maze[mazeRow][mazeColumnItem] === "B") {
-            bearLocation = [mazeRow, mazeColumnItem];
-            console.log("the bear is now at " + bearLocation);
-            drawMazeItem(bearImage, mazeRow);
-        } 
-        else {
-            drawMazeItem(blankImage, mazeRow);
-        }
+      if (maze[mazeRow][mazeColumnItem] === "W") {
+        drawMazeItem(treeImage, mazeRow);
+      
+    } else if (maze[mazeRow][mazeColumnItem] === "S") {
+        drawMazeItem(bearImage, mazeRow);
+        startLocation = [mazeRow, mazeColumnItem];
+        maze[mazeRow] = maze[mazeRow].replace("S", "B"); //changes the S to a B so that I should be able to move it.
+      
+    } else if (maze[mazeRow][mazeColumnItem] === "F") {
+        drawMazeItem(cabinImage, mazeRow);
+        finishLocation = [mazeRow, mazeColumnItem];
+      
+    } else if (maze[mazeRow][mazeColumnItem] === "B") {
+        drawMazeItem(bearImage, mazeRow);
+      
+    } else {
+        drawMazeItem(blankImage, mazeRow);
+      }
     }
-}
+  }
 }
 
 
 function drawMazeItem(imageToDraw, mazeRow) {
-    var imageName = imageToDraw.slice(4, -4)
-    var img = document.createElement("IMG");
-    var destination = document.getElementById("row" + mazeRow);
-    img.src = imageToDraw;
-    img.className = "mazeItem " + imageName;
-    destination.appendChild(img);
+  //make an image element  
+  var img = document.createElement("IMG");
+  //put the assigned image in that element
+  img.src = imageToDraw;
+  //create class name of "mazeItem" and the title of the image
+  var imageName = imageToDraw.slice(4, -4);
+  img.className = "mazeItem " + imageName;
+  //append image to the correct row
+  var destination = document.getElementById("row" + mazeRow);
+  destination.appendChild(img);
 }
 
 
 function moveBear(e) {
-    oldBearLocation = bearLocation.slice(0) 
-    console.log("bear location before movement (key registered) is " + bearLocation)
-    var spaceUp = maze[bearLocation[0]-1][bearLocation[1]]
-    var spaceDown = maze[bearLocation[0]+1][bearLocation[1]]
-    var spaceRight = maze[bearLocation[0]][bearLocation[1]+1]
-    var spaceLeft = maze[bearLocation[0]][bearLocation[1]-1]
-    
-    if (e.key === "ArrowUp" || e.key === "W" || e.key === "w") {
-        if (spaceUp == "W" || spaceUp == undefined) {return}      
-        bearLocation[0]-- 
-        moveBearInMazeArray()
-        drawMazeAndUpdateBearLocation()
-        console.log("we move the bear up 1 row.  bear location is now: " + bearLocation)
-                
-    } else if (e.key === "ArrowDown" || e.key === "S" || e.key === "s") {
-        if (spaceDown == "W" || spaceDown == undefined) {return}
-        bearLocation[0]++ 
-        moveBearInMazeArray()       
-        drawMazeAndUpdateBearLocation()
-        console.log("we move the bear down 1 row.  bear location is now: " + bearLocation)
-      
-    } else if (e.key === "ArrowLeft" || e.key === "A" || e.key === "a") {
-        if (spaceLeft == "W" || spaceLeft == undefined) {return}
-        bearLocation[1]-- 
-        moveBearInMazeArray()
-        drawMazeAndUpdateBearLocation()
-        console.log("we move the bear left 1 row.  bear location is now: " + bearLocation)
-        
-    } else if (e.key === "ArrowRight" || e.key === "D" || e.key === "d") {
-        if (spaceRight == "W" || spaceRight == undefined) {return}
-        maze[bearLocation[0]] =  maze[bearLocation[0]].replace("B ", " B") 
-        bearLocation[1] = bearLocation[1] + 1
-        moveBearInMazeArray()   
-        drawMazeAndUpdateBearLocation()
-        console.log("we move the bear right 1 row.  bear location is now: " + bearLocation)
+  //hold where the bear WAS as an array that does not reference its source array 
+  oldBearLocation = bearLocation.slice(0);
+  
+  //look around the bear and determine what's next to him in all 4 directions
+  var spaceUp = maze[bearLocation[0] - 1][bearLocation[1]];
+  var spaceDown = maze[bearLocation[0] + 1][bearLocation[1]];
+  var spaceRight = maze[bearLocation[0]][bearLocation[1] + 1];
+  var spaceLeft = maze[bearLocation[0]][bearLocation[1] - 1];
+  
+  checkForWin(spaceUp)
+  checkForWin(spaceDown)
+  checkForWin(spaceLeft)
+  checkForWin(spaceRight)
+  
+  //respond to directional keys
+  if (e.key === "ArrowUp" || e.key === "W" || e.key === "w") {  //use arrow keys or WASD
+    if (spaceUp == "W" || spaceUp == undefined) {  //make sure the target destination is open and legal
+      return;
     }
+    //move the B in the maze array one row up by slicing and concatenating the rows
+    var bearColumnIndex = maze[oldBearLocation[0]].indexOf("B");
+    
+    maze[oldBearLocation[0]] =              //puts a " " where the bear used to be
+      maze[oldBearLocation[0]].slice(0, bearColumnIndex) +
+      " " +
+      maze[oldBearLocation[0]].slice(bearColumnIndex + 1);
 
+    maze[oldBearLocation[0] - 1] =          //puts a "B" where the bear used to be
+      maze[oldBearLocation[0] - 1].slice(0, bearColumnIndex) +
+      "B" +
+      maze[oldBearLocation[0] - 1].slice(bearColumnIndex + 1);
+    
+    bearLocation[0]--;                       //update bear location
+    redrawMaze();
+    return;
+
+  } else if (e.key === "ArrowDown" || e.key === "S" || e.key === "s") {
+    if (spaceDown == "W" || spaceDown == undefined) {
+      return;
+    }
+    var bearColumnIndex = maze[oldBearLocation[0]].indexOf("B");
+    
+    maze[oldBearLocation[0]] =
+      maze[oldBearLocation[0]].slice(0, bearColumnIndex) +
+      " " +
+      maze[oldBearLocation[0]].slice(bearColumnIndex + 1);
+    
+    maze[oldBearLocation[0] + 1] =
+      maze[oldBearLocation[0] + 1].slice(0, bearColumnIndex) +
+      "B" +
+      maze[oldBearLocation[0] + 1].slice(bearColumnIndex + 1);
+    
+    bearLocation[0]++;
+    redrawMaze();
+    return;
+
+  } else if (e.key === "ArrowLeft" || e.key === "A" || e.key === "a") {
+    if (spaceLeft == "W" || spaceLeft == undefined) {
+      return;
+    }
+    maze[bearLocation[0]] = maze[bearLocation[0]].replace(" B", "B ");
+    bearLocation[1]--;
+    redrawMaze();
+    return;
+
+  } else if (e.key === "ArrowRight" || e.key === "D" || e.key === "d") {
+    if (spaceRight == "W" || spaceRight == undefined) {
+      return;
+    }
+    maze[bearLocation[0]] = maze[bearLocation[0]].replace("B ", " B");
+    bearLocation[1] = bearLocation[1] + 1;
+    redrawMaze();
+    return;
+  }
 }
 
 
-function moveBearInMazeArray() {
-    console.log("old bear location was " + oldBearLocation);
-    console.log("and the new bear location is" + bearLocation)
-    console.log("the old location showed a "+ maze[oldBearLocation[0]][oldBearLocation[1]] )
-    console.log("while the new location used to show a " + maze[bearLocation[0]][bearLocation[1]])
-    maze[oldBearLocation[0]][oldBearLocation[1]] = " " 
-    newColumnLocation = oldBearLocation[1]
-    console.log(typeof newColumnLocation)
-
-    maze[bearLocation[0]][bearLocation[1]] = "B"
+function checkForWin(target) {
+    if (target !== "F") {return}
+    document.getElementById("youWon").style.display="flex"
 }
-
 
 createHTMLRows();
-drawMazeAndUpdateBearLocation();
-bearLocation = startLocation.slice(0); 
+redrawMaze();
+bearLocation = startLocation.slice(0);
 oldBearLocation = bearLocation.slice(0);
 document.addEventListener("keydown", moveBear);
-
-//after winning, set a timer before popping up YOU WON screen.  set YOU WON to display:flex
-//draw the maze on the screen
-//find S on the map and set the playerLocation to that
+document.getElementById("startOver").addEventListener("click", startOver)

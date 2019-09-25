@@ -4,11 +4,15 @@
 
 body {
     background-image: url("img/grass.jpg");
+    position: relative;
 
 
 }
 footer {
-    background-color: forestgreen
+    display: flex;
+    width: 100%;
+    background-color: green;
+    justify-content: space-between;
 }
 
 header {
@@ -32,7 +36,7 @@ header h1 {
 header p {
     display: flex;
     flex-direction: row;
-    margin-bottom: 0;
+    margin:0;
 }
 
 header img {
@@ -80,11 +84,11 @@ header img {
 
 .youWon {
     display: none;
+    position: relative;
     flex-direction: column;
     font-size: xx-large;
-    color: forestgreen;
-    background-color:ivory;
-    border: 1px double black;
+    color: black;
+    text-shadow: 2px 2px white;
     border-radius: 1em;
     align-items: center;
    
