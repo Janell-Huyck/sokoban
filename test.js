@@ -2,5 +2,5 @@
 //Since this was my first attempt at TDD, I'm going to try again with the next project!
 
 //cannot determine player location - location is underined
-console.assert(bearLocation !== undefined, "We have lost the bear!  His location is 'undefined'!");
+// console.assert(bearLocation !== undefined, "We have lost the bear!  His location is 'undefined'!");
 

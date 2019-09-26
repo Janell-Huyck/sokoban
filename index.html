@@ -4,31 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Maze-Runner</title>
+    <title>Sokoban</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
-        <h1>Go Home, Bear!</h1>
-            <p> Oh no! You're a cute little bear 
-            <img src = "img/bear.png" alt = "bear"> 
-            who is lost in the woods! Find your
-            way home...
-            <img src = "img/cabin.png" alt = "cabin">
-        </p>
-        <p>Use the arrow keys or W,A,S,D to guide the bear into the house</p>
+        <h1>Empty Tummy!</h1>
+            <p> Oh no! You made it <a href ="https://janell-s-kenzie-projects.gitlab.io/maze-runner">
+              home through the woods</a>... and now you're starving!</p>
+              <p>Push ALL the empty honey jars
+              <img src = "img/emptyjar.png" alt="empty honey jar"> onto the honey combs
+              <img src = "img/honey.png" alt="honeycomb"> to get a scrumptious treat!  </p>
+        <p>Use the arrow keys or W,A,S,D to push the jars onto the honeycombs.</p>
         <button id = "startOver">Start Over?</button>
     </header>
 
     <section class="youWon" id = "youWon">
-        <h2>Congratulations! You Found Your Way Home!</h2>
+        <h2>Congratulations! You Got All the Honey!</h2>
         <img src = "img/bear-win.png" alt = "bear with heart">
     </section>
 
-    <div id="thisIsTheMaze" class="maze"></div>
-    <div id="optionsAvailableDuringGame" class = "optionsAvailableDuringGame">
-      <button id="resetMaze">Reset Maze</button>
-    </div>
+    <div id="thisIsTheForest" class="forest"></div>
     <footer>
         <div>Website by Janell Huyck</div>
         <div>Images by <a href="https://pixabay.com/">Pixabay.com</a></div>

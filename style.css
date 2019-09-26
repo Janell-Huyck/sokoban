@@ -1,43 +1,43 @@
 :root {
-    background-color:green;
+    --squareSize: 3em;
+    --forestBackgroundColor: darkgoldenrod;
+    --lighterBackgroundColor:rgb(200, 153, 0);
 }
 
 body {
-    background-image: url("img/grass.jpg");
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+    grid-template-rows: auto;
+    place-items: center;
+    background: url("img/grass.jpg") repeat center center fixed;
     position: relative;
-
-
-}
-footer {
-    display: flex;
+    height: 100%;
     width: 100%;
-    background-color: green;
-    justify-content: space-between;
+}
+
+footer {
+    position: absolute;
+    background-color: ivory;
+    bottom: 0;
+    right: 0;
+    border-radius: 1em;
+    padding: 0.5em;
 }
 
 header {
+    width: 116px;
+    flex: 0 1;
     display: flex;
     flex-direction: column;
     background-color: ivory;
     border: 1px double black;
     border-radius: 1em;
     padding: 1em;
-    align-items: center;
-    max-width: 60%;
-    justify-content: center;
-    margin: auto;
+    position: static;
+    left: 0;
+  
 }
 
-header h1 {
-    margin: 0;
-}
-
-
-header p {
-    display: flex;
-    flex-direction: row;
-    margin:0;
-}
 
 header img {
     max-height: 25px;
@@ -45,12 +45,36 @@ header img {
     align-self: center;
 }
 
+.thisIsTheForest {
+    flex: 1 1;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background-color: var(--forestBackgroundColor);
+    justify-self: flex-start;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    height: var(--squareSize);
+}
+
+.square {
+    height: var(--squareSize);
+    width: var(--squareSize);
+    background-size: contain;
+    background-repeat: no-repeat; 
+    background-position: center;
+
+}
 
 .optionsAvailableDuringGame {
     display: none
 }
 
-.maze {
+/* .maze {
     width: 70%;
     background-color: darkgoldenrod;
     border: 1px solid black;
@@ -66,20 +90,38 @@ header img {
     flex-direction: row;
     width: 100%;
     flex: 1 1
-}
+} */
 
-.mazeItem {
+/* .mazeItem {
     height: 30px;
     width: 30px;
     flex: 1 1
-}
+} */
 
 .tree {
-    background-color: darkgoldenrod;
+    background-color:var(--forestBackgroundColor);
 }
 
-.blank {
-    opacity: 0.4;
+.emptyjar {
+    background-color:var(--forestBackgroundColor);
+}
+
+.fulljar {
+    background-color: ivory;
+}
+
+.blank{
+    background-color:var(--lighterBackgroundColor);
+
+}
+
+.bear{
+    background-color: var(--forestBackgroundColor);
+}
+
+.honey{
+    background-color:var(--forestBackgroundColor);
+
 }
 
 .youWon {
