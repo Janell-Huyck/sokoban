@@ -2,6 +2,7 @@
     --squareSize: 3em;
     --forestBackgroundColor: darkgoldenrod;
     --lighterBackgroundColor:rgb(200, 153, 0);
+    --veryLightBackground: ivory;
 }
 
 body {
@@ -17,7 +18,7 @@ body {
 
 footer {
     position: absolute;
-    background-color: ivory;
+    background-color:var(--veryLightBackground);
     bottom: 0;
     right: 0;
     border-radius: 1em;
@@ -29,7 +30,7 @@ header {
     flex: 0 1;
     display: flex;
     flex-direction: column;
-    background-color: ivory;
+    background-color: var(--veryLightBackground);
     border: 1px double black;
     border-radius: 1em;
     padding: 1em;
@@ -61,72 +62,83 @@ header img {
     height: var(--squareSize);
 }
 
-.square {
+.forestSquareImage {
     height: var(--squareSize);
     width: var(--squareSize);
     background-size: contain;
     background-repeat: no-repeat; 
     background-position: center;
+    background-color: var(--lighterBackgroundColor)
 
 }
 
-.optionsAvailableDuringGame {
+
+/* .optionsAvailableDuringGame {
     display: none
-}
-
-/* .maze {
-    width: 70%;
-    background-color: darkgoldenrod;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-}
-
-.mazeRow {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    flex: 1 1
 } */
 
-/* .mazeItem {
-    height: 30px;
-    width: 30px;
-    flex: 1 1
-} */
 
 .tree {
     background-color:var(--forestBackgroundColor);
+    height: var(--squareSize)
 }
 
 .emptyjar {
-    background-color:var(--forestBackgroundColor);
+    background-color:var(--lighterBackgroundColor);
 }
 
 .fulljar {
-    background-color: ivory;
+    background-color: var(--lighterBackgroundColor);
 }
 
 .blank{
-    background-color:var(--lighterBackgroundColor);
+   opacity: 0;
+}
 
+
+.honey{
+    opacity: 0;
+}
+
+.H {
+    background: url(img/honey.png) center no-repeat, url(img/forestFloor.png);
+    background-size: var(--squareSize)
+}
+
+.H img {
+    opacity: 0;
 }
 
 .bear{
-    background-color: var(--forestBackgroundColor);
+    background-color: var(--lighterBackgroundColor);
 }
 
-.honey{
-    background-color:var(--forestBackgroundColor);
+#bear {
+    opacity: 1;
+}
 
+#jar1 {
+    opacity: 1;
+}
+#jar2 {
+    opacity: 1;
+}
+#jar3 {
+    opacity: 1;
+}
+#jar4 {
+    opacity: 1;
+}
+#jar5 {
+    opacity: 1;
+}
+#jar6 {
+    opacity: 1;
 }
 
 .youWon {
     display: none;
-    position: relative;
+    position: absolute;
     flex-direction: column;
     font-size: xx-large;
     color: black;
@@ -136,7 +148,29 @@ header img {
    
 }
 
+.youWon h2 {
+    background-color: var(--veryLightBackground);
+    padding: .25em;
+    border-radius: .5em;
+}
+
 .youWon img {
     max-height: 15em;
     max-width: 15em;
+}
+
+.instructions {
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+.instructions {
+    background-color: var(--veryLightBackground);
+    border: 1px solid black;
+    border-radius: 1em;
+}
+
+#instructionsToHide {
+    display: none
 }
